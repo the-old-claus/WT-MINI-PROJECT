@@ -1,0 +1,14 @@
+.menu{
+    display : flex;
+    width : 100%;
+  }
+.menu li{
+    display : block;
+    padding: 10px;
+    position: sticky;
+}
+
+.menu li a { 
+    color: white; 
+    text-decoration: none; 
+}
