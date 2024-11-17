@@ -1,11 +1,15 @@
 .menu{
     display : flex;
+    flex-direction: row;
     width : 100%;
+    justify-content:center;
+    background-color: black;
   }
 .menu li{
-    display : block;
+    display: inline;
     padding: 10px;
     position: sticky;
+    
 }
 
 .menu li a { 

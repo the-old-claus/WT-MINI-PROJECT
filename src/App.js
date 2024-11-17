@@ -5,6 +5,7 @@ import { Route, BrowserRouter, Routes  } from 'react-router-dom'
 import Login  from './pages/Enter/login'
 import Layout from './pages/navigation/Layout'
 import Home from './pages/Enter/home'
+import axios from 'axios'
 
 function App() {
   
