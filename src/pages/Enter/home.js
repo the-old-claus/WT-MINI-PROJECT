@@ -179,7 +179,7 @@
         </div>
         <div style={styles.footerContent}>
           <h3>Follow Us</h3>
-          <p><a href = 'https://www.facebook.com'>Facebook</a> | Twitter | LinkedIn</p>
+          <p><a href = 'https://www.facebook.com'>Facebook</a> | <a href = 'https://www.twitter.com'>Twitter</a> | <a href = 'https://www.linkedin.com'>LinkedIn</a></p>
         </div>
       </footer>
     </div>

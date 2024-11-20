@@ -1,42 +1,79 @@
-import { Outlet, Link } from "react-router-dom";
-import './Layout.css'
+import { Outlet, NavLink } from "react-router-dom";
+import './Layout.css';
 
-
-const Layout = ({isLoggedin}) => {
+const Layout = ({ isLoggedin }) => {
   return (
-    <>{(isLoggedin)?(
-      <>
-      <nav style = {{margin : 0}}>
-          <ul className="menu">
-            <li style = {{backgroundColor : "#4a7766"}}>
-              <Link to="/">Dashboard</Link>
-            </li>
-            <li style = {{backgroundColor : "black"}}>
-              <Link to="/Login">Login</Link>
-            </li>
-          </ul>
-        </nav>
-        <Outlet />
-        </>
-      ):(
-        <>
-        <nav style = {{margin : 0}} >
-          <ul className="menu">
-            <li style = {{backgroundColor : "#4a7766"}}>
-              <Link to="/">Home</Link>
-            </li>
-            <li style = {{backgroundColor : "black"}}>
-              <Link to="/Login">Login</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Outlet />
-      </>      
-      )
-}
+    <>
+      <nav style={{ margin: 0 }}>
+        <ul className="menu">
+          {isLoggedin ? (
+            <>
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) => (isActive ? "active" : "inactive")}
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/Batches"
+                  className={({ isActive }) => (isActive ? "active" : "inactive")}
+                >
+                  Batches
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) => (isActive ? "active" : "inactive")}
+                >
+                  Contact Us
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/Feedback"
+                  className={({ isActive }) => (isActive ? "active" : "inactive")}
+                >
+                  Feedback
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) => (isActive ? "active" : "inactive")}
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/Login"
+                  className={({ isActive }) => (isActive ? "active" : "inactive")}
+                >
+                  Login
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) => (isActive ? "active" : "inactive")}
+                >
+                  Contact Us
+                </NavLink>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
+      <Outlet />
     </>
-  )
+  );
 };
 
 export default Layout;

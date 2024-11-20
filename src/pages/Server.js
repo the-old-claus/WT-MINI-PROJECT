@@ -38,15 +38,54 @@ const findUser = async (username, password) => {
   };
   
 
-
+  app.get('/api/batches', async (req, res) => {
+    try {
+      const users = await collection.find({}).toArray();
+      
+      // Group users by graduation year
+      const batchMap = users.reduce((acc, user) => {
+        const batchKey = user.graduationYear;
+        if (!acc[batchKey]) acc[batchKey] = [];
+        acc[batchKey].push(user);
+        return acc;
+      }, {});
+  
+      // Transform batchMap to an array for rendering
+      const batchArray = Object.entries(batchMap).map(([year, members]) => ({
+        id: year, // Use the year as the ID
+        years: year, // The year itself
+        strength: members.length, // Count of members in that batch
+        members: members, // Optionally include members
+      }));
+  
+      res.status(200).json(batchArray.reverse()); // Most recent batches first
+    } catch (error) {
+      console.error('Error fetching batches:', error);
+      res.status(500).send('Failed to fetch batches');
+    }
+  });
+  
+  app.get('/api/alumni/:batch', async (req, res) => {
+    const { batch } = req.params;
+    try {
+      const alumni = await collection.find({ graduationYear: batch }).toArray();
+      res.status(200).json(alumni);
+    } catch (error) {
+      console.error('Error fetching alumni:', error);
+      res.status(500).send('Failed to fetch alumni');
+    }
+  });
+  
 app.post('/save', async (req, res) => {
-    const { username, password, email, graduationYear } = req.body;
+    const { username, password, email, graduationYear, institute, link } = req.body;
   
     const userDetails = {
       username,
       password,
       email,
-      graduationYear
+      graduationYear,
+      institute,
+      link
     };
   
     try {
